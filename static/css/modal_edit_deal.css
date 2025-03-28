@@ -1,0 +1,170 @@
+/* Стили для модального окна */
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    width: 90%;
+    z-index: 1000;
+}
+
+/* Стили для заголовка */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #6c757d;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #dc3545;
+}
+
+/* Стили для контейнера с деталями */
+.details-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Стили для форм */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #343a40;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Стили для таблицы */
+.related-tools {
+    margin-top: 20px;
+}
+
+.related-tools table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.related-tools th,
+.related-tools td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.related-tools th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+}
+
+/* Стили для кнопок */
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.modal-button-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-button-primary:hover {
+    background-color: #0056b3;
+}
+
+.modal-button-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.modal-button-secondary:hover {
+    background-color: #545b62;
+}
+
+/* Стили для кнопок удаления */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Стили для фона */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.related-tools table tbody tr {
+    transition: opacity 0.3s ease-out;
+}
+
+.related-tools table tbody tr.removing {
+    opacity: 0;
+}

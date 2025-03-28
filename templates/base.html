@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block links %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__links">
+                <a href="http://127.0.0.1:5000/details" id="mainPageDetail">Детали</a>
+                <a href="http://127.0.0.1:5000/deals" id="mainPageDeal">Сделки</a>
+            </div>
+            <div class="header__right">
+                <a href="#" class="selected-deal" onclick="openSelectDealModal()">Выбранная сделка</a>
+                <!-- <button class="personal-cabinet" onclick="openCabinetModal()">Личный кабинет</button> -->
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <div class = "main-content">
+            
+            
+            
+            {% block content %}{% endblock %}
+            
+        </div>
+
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'modal.html' %}
+
+{% block modal_attributes %}
+    id="dealFilterModal"
+{% endblock %}
+
+{% block modal_title %}Настройка фильтров{% endblock %}
+
+{% block modal_content %}
+<div class="filter-options">
+    {% for key in ['DCONMS', 'DMIN', 'LU', 'TPN', 'TPX', 'TPIN', 'TPIX', 't', 'a', 'CF', 'THL', 'OAL', 'PDY', 'RE', 'HAND'] %}
+    <div class="filter-group">
+        <h3>{{ key }}</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать {{ key }}
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block modal_apply_button %}
+<button class="modal-button modal-button-primary" onclick="applyFilters()">Применить</button>
+{% endblock %}
+

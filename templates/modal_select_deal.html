@@ -1,0 +1,24 @@
+{% extends 'modal.html' %}
+
+{% block modal_attributes %}
+    id="selectDealModal"
+{% endblock %}
+
+{% block modal_title %}Выбор сделки{% endblock %}
+
+{% block modal_content %}
+<div class="deal-selector">
+    <label class="deal-label">Выберите сделку:</label>
+    <select id="dealSelect" class="deal-select">
+        <!-- Список сделок будет заполнен динамически -->
+    </select>
+    <div id="noDealsMessage" class="no-deals-message">
+        Нет существующих сделок
+    </div>
+</div>
+{% endblock %}
+{% block modal_apply_button %}
+<button class="modal-button modal-button-primary" name="apply_select_deal" onclick="applySelectDeal()">Применить</button>
+{% endblock %}
+
+

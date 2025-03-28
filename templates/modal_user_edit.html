@@ -1,0 +1,16 @@
+{% extends 'modal.html' %}
+
+{% block modal_attributes %}
+    id="editUserModal"
+{% endblock %}
+
+{% block modal_title %}Редакирование пользователя{% endblock %}
+
+{% block modal_content %}
+<div class="user-container">
+</div>
+{% endblock %}
+{% block modal_apply_button %}
+<button class="modal-button modal-button-primary" onclick="applyChanges()">Применить</button>
+{% endblock %}
+

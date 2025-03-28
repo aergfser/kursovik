@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Вход в систему</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+	<div class="card w-100" style="max-width: 400px;">
+		<div class="card-body">
+			<h3 class="card-title text-center mb-4">Вход в систему</h3>
+			<form method="post">
+				<div class="mb-3">
+					<label for="username" class="form-label">Имя пользователя</label>
+					<input type="text" class="form-control" id="username" name="username"
+					       aria-describedby="usernameHelp">
+					<div id="usernameHelp" class="form-text">Ваше имя пользователя останется конфиденциальным.</div>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Пароль</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<div class="mb-3 form-check">
+					<input type="checkbox" class="form-check-input" id="rememberMe">
+					<label class="form-check-label" for="rememberMe">Запомнить меня</label>
+				</div>
+				<button type="submit" class="btn btn-primary w-100" name="submit">Войти</button>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.querySelector('form');
+		
+		form.addEventListener('submit', async function(e) {
+			e.preventDefault(); // Предотвращаем стандартную отправку формы
+			
+			// Получаем данные из формы
+			const username = document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+			const rememberMe = document.getElementById('rememberMe').checked;
+			
+			// Добавляем индикатор загрузки к кнопке
+			const submitButton = document.querySelector('button[type="submit"]');
+			const originalText = submitButton.textContent;
+			submitButton.disabled = true;
+			submitButton.textContent = 'Вход...';
+			
+			try {
+				const response = await fetch('/admin_login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: new URLSearchParams({
+						username: username,
+						password: password,
+						rememberMe: rememberMe
+					})
+				});
+				
+				const result = await response.json();
+				
+				if (response.ok) {
+					// Успешный вход - перенаправляем на deals
+					window.location.href = '/deals';
+				} else {
+					// Обработка ошибки
+					const errorDiv = document.createElement('div');
+					errorDiv.className = 'alert alert-danger mt-3';
+					errorDiv.textContent = result.error || 'Произошла ошибка при входе';
+					form.parentNode.insertBefore(errorDiv, form.nextSibling);
+				}
+			} catch (error) {
+				console.error('Ошибка:', error);
+				const errorDiv = document.createElement('div');
+				errorDiv.className = 'alert alert-danger mt-3';
+				errorDiv.textContent = 'Произошла сетевая ошибка';
+				form.parentNode.insertBefore(errorDiv, form.nextSibling);
+			} finally {
+				// Восстанавливаем состояние кнопки
+				submitButton.disabled = false;
+				submitButton.textContent = originalText;
+			}
+		});
+	});
+	</script>
+</body>
+</html>

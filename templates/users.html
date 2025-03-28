@@ -1,0 +1,95 @@
+{% extends 'content.html' %}
+{% block title %}Пользователи{% endblock %}
+{% block include_styles %}
+{% endblock %}
+{% block thead %}
+<thead>
+<tr>
+<th>ФИО</th>
+<th>Роль</th>
+<th>Логин</th>
+</tr>
+</thead>
+{% endblock %}
+{% block tbody %}
+<tbody>
+{% for user in users %}
+<tr>
+<td>
+<a href="#" class="user-link" onclick="openEditUserModal('{{ user._id }}')">{{ user.fio }}</a>
+</td>
+<td>
+<div class="editable-cell" 
+     data-field="role" 
+     data-id="{{ user._id }}"
+     onclick="makeCellEditable(this)">
+{{ user.role }}
+</div>
+</td>
+<td>
+<div class="editable-cell" 
+     data-field="username" 
+     data-id="{{ user._id }}"
+     onclick="makeCellEditable(this)">
+{{ user.username }}
+</div>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+{% endblock %}
+
+<style>
+.editable-cell {
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.editable-cell:hover {
+    background-color: #f0f0f0;
+}
+
+.editable-input {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+</style>

@@ -1,0 +1,207 @@
+{% extends 'content.html' %}
+
+{% block styles %}
+<style>
+    /* Существующие стили остаются без изменений */
+    
+    /* Стили для модального окна редактирования */
+    .edit-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .edit-modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .edit-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .edit-modal-title {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .close-edit-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    .edit-form {
+        display: grid;
+        gap: 15px;
+    }
+
+    .edit-form-group {
+        display: grid;
+        gap: 5px;
+    }
+
+    .edit-form-group label {
+        font-weight: bold;
+    }
+
+    .edit-form-group input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .edit-modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .edit-button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .edit-button-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .edit-button-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .edit-button:hover {
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}
+
+{% block modal_edit %}
+<div class="edit-modal" id="editModal">
+    <div class="edit-modal-content">
+        <div class="edit-modal-header">
+            <h2 class="edit-modal-title">Редактирование инструмента</h2>
+            <button class="close-edit-button" onclick="closeEditModal()">&times;</button>
+        </div>
+        <form class="edit-form" id="editForm">
+            <div class="edit-form-group">
+                <label for="designation">Наименование:</label>
+                <input type="text" id="designation" name="designation">
+            </div>
+            {% for key in ['DCONMS', 'DMIN', 'LU', 'TPN', 'TPX', 'TPIN', 'TPIX', 't', 'a', 'CF', 'THL', 'OAL', 'PDY', 'RE', 'HAND'] %}
+            <div class="edit-form-group">
+                <label for="{{ key }}">{{ key }}:</label>
+                <input type="number" id="{{ key }}" name="{{ key }}">
+            </div>
+            {% endfor %}
+            <div class="edit-modal-buttons">
+                <button class="edit-button edit-button-secondary" type="button" onclick="closeEditModal()">Отмена</button>
+                <button class="edit-button edit-button-primary" type="submit">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+async function loadToolData(itemId) {
+    try {
+        const response = await fetch(`/api/tools/${itemId}`);
+        const toolData = await response.json();
+        return toolData;
+    } catch (error) {
+        console.error('Ошибка при загрузке данных инструмента:', error);
+        return null;
+    }
+}
+
+function openEditModal(itemId) {
+    const modal = document.getElementById('editModal');
+    modal.style.display = 'block';
+    
+    loadToolData(itemId).then(item => {
+        if (item) {
+            document.getElementById('designation').value = item.designation;
+            
+            // Заполняем характеристики
+            for (const [key, value] of Object.entries(item.details)) {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = value;
+                }
+            }
+        }
+    });
+}
+
+function closeEditModal() {
+    const modal = document.getElementById('editModal');
+    modal.style.display = 'none';
+}
+
+document.getElementById('editForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const itemId = formData.get('itemId');
+    
+    // Собираем данные для отправки
+    const data = {
+        designation: formData.get('designation'),
+        details: {}
+    };
+    
+    // Собираем характеристики
+    for (const [key, value] of formData.entries()) {
+        if (key !== 'designation' && key !== 'itemId') {
+            data.details[key] = value;
+        }
+    }
+    
+    // Здесь нужно добавить код для отправки данных на сервер
+    console.log('Отправляем данные:', data);
+    closeEditModal();
+});
+</script>
+{% endblock %}
+
+{% block tbody %}
+<tbody>
+{% for item in items %}
+<tr>
+    <td>
+        <a href="#" class="product-link" onclick="openEditModal('{{ item._id }}')">{{ item.designation }}</a>
+    </td>
+    <td>
+        <div class="details-grid">
+            {% for key, value in item.details.items() %}
+            <div class="detail-item">
+                <strong>{{ key }}</strong>: {{ value }}
+            </div>
+            {% endfor %}
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+{% endblock %}

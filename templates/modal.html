@@ -1,0 +1,14 @@
+<!-- Модальное окно фильтрации -->
+<div {% block modal_attributes %}id="Modal"{% endblock %} class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">{% block modal_title %}{% endblock %}</h2>
+            <button class="close-button" onclick="closeModal()">&times;</button>
+        </div>
+        {% block modal_content %}{% endblock %}
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            {% block modal_apply_button %}{% endblock %}
+        </div>
+    </div>
+</div>

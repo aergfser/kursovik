@@ -1,0 +1,40 @@
+{% extends 'content.html' %}
+
+{% block title %}Сделки{% endblock %}
+
+{% block include_styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/details.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modal_edit_deal.css') }}">
+{% endblock %}
+
+{% block thead %}
+<thead>
+    <tr>
+        <th>Номер</th>
+        <th>Характеристики</th>
+    </tr>
+</thead>
+{% endblock %}
+
+{% block tbody %}
+<tbody>
+    {% for item in items %}
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('{{ item._id }}')">{{ item.number }}</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                {% for key, value in item.items() %}
+                    {% if key not in ['_id', 'number'] %}
+                    <div class="details-item">
+                        <strong>{{ key }}</strong>: {{ value }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+{% endblock %}

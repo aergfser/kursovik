@@ -1,0 +1,17 @@
+{% extends 'modal.html' %}
+
+{% block modal_attributes %}
+    id="editModal"
+{% endblock %}
+
+{% block modal_title %}Редакирование записи{% endblock %}
+
+{% block modal_content %}
+<div class="details-container">
+</div>
+{% endblock %}
+{% block modal_apply_button %}
+<button class="modal-button modal-button-primary" name="apply" onclick="applyChanges()">Применить</button>
+<button class="modal-button modal-button-primary" name="add_to_deal" onclick="addToDeal()">Добавить к сделке</button>
+{% endblock %}
+

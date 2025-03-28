@@ -1,0 +1,44 @@
+{% extends 'content.html' %}
+
+{% block title %}Детали{% endblock %}
+
+{% block include_styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/details.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modal_edit_detail.css') }}">
+{% endblock %}
+
+{% block searchContainer %}
+<button class="search-button modal-button" onclick="openModal()">Фильтр</button>
+{% endblock %}
+
+{% block thead %}
+<thead>
+    <tr>
+        <th>Наименование</th>
+        <th>Характеристики</th>
+    </tr>
+</thead>
+{% endblock %}
+
+{% block tbody %}
+<tbody>
+    {% for item in items %}
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditModal('{{ item._id }}')">{{ item.designation }}</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                {% for key, value in item.details.items() %}
+                <div class="detail-item">
+                    <strong>{{ key }}</strong>: {{ value }}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="edit-button" onclick="downloadWordDocument('{{ item._id }}')">Загрузить документ</button>
+
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+{% endblock %}

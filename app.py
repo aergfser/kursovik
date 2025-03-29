@@ -392,7 +392,8 @@ def logout():
     return redirect(url_for('admin_login'))
 
 @app.route('/deals')
-return render_template('111.html')
+def deals():
+    return render_template('111.html')
 # @require_login
 # def deals():
 #     role = get_role(session.get('user_id'))

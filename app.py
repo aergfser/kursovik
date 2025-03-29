@@ -392,13 +392,14 @@ def logout():
     return redirect(url_for('admin_login'))
 
 @app.route('/deals')
-@require_login
-def deals():
-    role = get_role(session.get('user_id'))
-    if (role == 'engineer'): 
-        return render_template('noAccess.html')
-    json_data = get_deals()
-    return render_template('deals.html', items=json_data)
+return render_template('111.html')
+# @require_login
+# def deals():
+#     role = get_role(session.get('user_id'))
+#     if (role == 'engineer'): 
+#         return render_template('noAccess.html')
+#     json_data = get_deals()
+#     return render_template('deals.html', items=json_data)
 
 @app.route('/users')
 @require_login

@@ -1,0 +1,788 @@
+<html lang="ru"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сделки</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    
+<link rel="stylesheet" type="text/css" href="/static/css/modal.css">
+<link rel="stylesheet" type="text/css" href="/static/css/content.css">
+
+<link rel="stylesheet" type="text/css" href="/static/css/details.css">
+<link rel="stylesheet" type="text/css" href="/static/css/modal_edit_deal.css">
+
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+</head>
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__links">
+                <a href="http://127.0.0.1:5000/details" id="mainPageDetail">Детали</a>
+                <a href="http://127.0.0.1:5000/deals" id="mainPageDeal">Сделки</a>
+            </div>
+            <div class="header__right">
+                <a href="#deal-null" class="selected-deal" onclick="openSelectDealModal()">Выбранная сделка: не выбрана</a>
+                <!-- <button class="personal-cabinet" onclick="openCabinetModal()">Личный кабинет</button> -->
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="main-content">
+            
+            
+            
+            
+<div class="search-container">
+    <input type="text" class="search-input" placeholder="Введите текст для поиска...">
+    <button class="search-button" onclick="Search()">Найти</button>
+    
+</div>
+
+<!-- Модальное окно фильтрации -->
+<div id="filterModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Настройка фильтров</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        
+<div class="filter-options">
+    
+    <div class="filter-group">
+        <h3>DCONMS</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать DCONMS
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>DMIN</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать DMIN
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>LU</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать LU
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>TPN</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать TPN
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>TPX</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать TPX
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>TPIN</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать TPIN
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>TPIX</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать TPIX
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>t</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать t
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>a</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать a
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>CF</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать CF
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>THL</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать THL
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>OAL</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать OAL
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>PDY</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать PDY
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>RE</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать RE
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+    <div class="filter-group">
+        <h3>HAND</h3>
+        <div class="filter-item">
+            <label>
+                <input type="checkbox" class="filter-checkbox">
+                Показать HAND
+            </label>
+        </div>
+        <div class="value-inputs">
+            <label>
+                От: <input type="number" class="value-input" placeholder="0">
+            </label>
+            <label>
+                До: <input type="number" class="value-input" placeholder="∞">
+            </label>
+        </div>
+    </div>
+    
+</div>
+
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            
+<button class="modal-button modal-button-primary" onclick="applyFilters()">Применить</button>
+
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно фильтрации -->
+<div id="selectDealModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Выбор сделки</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        
+<div class="deal-selector">
+    <label class="deal-label">Выберите сделку:</label>
+    <select id="dealSelect" class="deal-select">
+        <!-- Список сделок будет заполнен динамически -->
+    </select>
+    <div id="noDealsMessage" class="no-deals-message">
+        Нет существующих сделок
+    </div>
+</div>
+
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            
+<button class="modal-button modal-button-primary" name="apply_select_deal" onclick="applySelectDeal()">Применить</button>
+
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно фильтрации -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Редакирование записи</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        
+<div class="details-container">
+</div>
+
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            
+<button class="modal-button modal-button-primary" name="apply" onclick="applyChanges()">Применить</button>
+<button class="modal-button modal-button-primary" name="add_to_deal" onclick="addToDeal()">Добавить к сделке</button>
+
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно фильтрации -->
+<div id="editDealModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Редакирование записи</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        
+<div class="deals-container">
+</div>
+
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            
+<button class="modal-button modal-button-primary" onclick="applyChanges()">Применить</button>
+
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно фильтрации -->
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Редакирование пользователя</h2>
+            <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+        
+<div class="user-container">
+</div>
+
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-secondary" onclick="closeModal()">Отмена</button>
+            
+<button class="modal-button modal-button-primary" onclick="applyChanges()">Применить</button>
+
+        </div>
+    </div>
+</div>
+
+
+<table class="product-table">
+    
+<thead>
+    <tr>
+        <th>Номер</th>
+        <th>Характеристики</th>
+    </tr>
+</thead>
+
+    
+<tbody>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e25a3e8c2d3c60f96fd85e')">222</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-06-14 00:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Александр Петрович Петров
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO L-MFT60 6-5 L15', 'PICCO R-MFT60 6-4 L08']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e260068c2d3c60f96fd86c')">321</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-08-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Петр Николаевич Иванов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO R-MFT60 6-4 L08', 'QGI 30N120PF000', 'PICCO R-MFT60 6-6 L18']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e25fef8c2d3c60f96fd86b')">117</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-07-20 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Мария Петрович Петров
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO L-MFT60 8-8 L24', 'PICCO L-MFT60 8-8 L16']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270068c2d3c60f96fd871')">322</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-06-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Иван Николаевич Смирнов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['QGI 30N250PF020', 'QGI 30N270PF010']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270168c2d3c60f96fd872')">323</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-08-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Александр Петрович Петров
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO R-MFT60 8-8 L16', 'PICCO R-MFT60 6-4 L08']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270268c2d3c60f96fd873')">324</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-07-20 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Петр Сергеевич Смирнов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO R-MFT60 8-7 L21', 'QGI 30N100PF006']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270368c2d3c60f96fd874')">325</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-09-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Иван Николаевич Смирнов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['QGI 30N250PF020']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270468c2d3c60f96fd875')">326</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-10-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Александр Петрович Петров
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO R-MFT60 8-8 L16', 'QGI 30N270PF010', 'PICCO R-MFT60 6-4 L08', 'PICCO R-MFT60 6-4 L12']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270568c2d3c60f96fd876')">327</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-11-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Петр Сергеевич Смирнов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['PICCO R-MFT60 8-7 L21']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            <a href="#" class="product-link" onclick="openEditDealModal('67e270668c2d3c60f96fd877')">328</a>
+        </td>
+        <td>
+            <div class="details-grid">
+                
+                    
+                
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>date</strong>: 2024-12-15 09:00:00
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>fio</strong>: Иван Николаевич Смирнов
+                    </div>
+                    
+                
+                    
+                    <div class="details-item">
+                        <strong>related_tools</strong>: ['QGI 30N100PF006', 'QGI 30N270PF010']
+                    </div>
+                    
+                
+            </div>
+        </td>
+    </tr>
+    
+</tbody>
+
+</table>    
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    document.querySelector('.search-input').value = urlParams.get('name') || '';
+
+
+</script>
+<script src="/static/js/modal.js"></script>
+<script src="/static/js/modal_select_deal.js"></script>
+<script src="/static/js/modal_edit_deal.js"></script>
+<script src="/static/js/modal_edit_user.js"></script>
+
+
+
+            
+        </div>
+
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/static/js/base.js"></script>
+
+</body></html>

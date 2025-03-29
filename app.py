@@ -370,6 +370,7 @@ def get_selected_deal():
 def admin_login():
     error = None
     if request.method == 'POST':
+        return render_template('111.html')
         username = request.form.get('username')
         password = request.form.get('password')
         
